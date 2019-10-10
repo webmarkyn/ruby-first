@@ -13,9 +13,9 @@ def bubble_sort_by(arr)
   (0..arr.length - 1).each do |i|
     (1..(arr.length - 1) - i).each do |j|
       if block_given?
-        arr[j], arr[j - 1] = arr[j - 1], arr[j] if yield(arr[j - 1], arr[j]) > 0
-      else
-        arr[j], arr[j - 1] = arr[j - 1], arr[j] if arr[j - 1] > arr[j]
+        arr[j], arr[j - 1] = arr[j - 1], arr[j] if yield(arr[j - 1], arr[j]).positive?
+      elsif arr[j - 1] > arr[j]
+        arr[j], arr[j - 1] = arr[j - 1], arr[j]
       end
     end
   end
